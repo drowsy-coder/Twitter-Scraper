@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form with Validation</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f4f4f4; 
+            }
+
+            h1 {
+                color: #333; 
+                text-align: center;
+            }
+
+            form {
+                background-color: #fff; 
+                padding: 20px;
+                border-radius: 8px; 
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 500px;
+                margin: 20px auto;
+            }
+
+            input[type="text"], input[type="tel"], input[type="number"], textarea {
+                width: 100%; 
+                padding: 10px;
+                margin: 6px 0 20px 0;
+                display: inline-block;
+                border: 1px solid #ccc; 
+                border-radius: 4px; 
+                box-sizing: border-box; 
+            }
+
+            input[type="submit"] {
+                width: 100%;
+                background-color: #4CAF50; 
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            input[type="submit"]:hover {
+                background-color: #45a049; 
+            }
+
+            label {
+                color: #555; 
+            }
+
+        </style>
+        <script>
+        function validateform() {
+            let name = document.forms["sform"]["name"].value;
+            let number = document.forms["sform"]["number"].value;
+            let gender = document.forms["sform"]["gender"].value;
+            let zip = document.forms["sform"]["zip"].value;
+
+            var nameReg = /\d/
+            if (nameReg.test(name)) {
+                alert("Name has number!");
+                return false;
+            }
+
+            if (number.length != 5) {
+                alert("Too small :(");
+                return false;
+            }
+
+            if (!gender) {
+                alert("Amara detected!?");
+                return false;
+            }
+
+            if(zip.length != 6) {
+                alert("America nahi hai :/");
+                return false;
+            }
+
+            window.location.href = "thankyou.html";
+            return false;
+
+        }
+        </script>
+    </head>
+    <body>
+        <h1>User Details Form</h1>
+        <br>
+        <form name="sform" onsubmit="return validateform()">
+            <label for="name" id="name">Name: </label>
+            <input name="name", id="name" type="text" required="true">
+            <br><br>
+            <label for="number" id="number">Number: </label>
+            <input name="number", id="number" required="true" type="tel">
+            <br><br>
+            Gender: Male <input type="radio" name="gender" value="Male"> Female <input type="radio" name="gender" value="Female">
+            <br><br>
+            <label for="Address" id="Address">Address: </label><br>
+            <textarea name="Address" required="true"></textarea>
+            <br><br>
+            <label for="zip" id="zip">Pin Code: </label>
+            <input name="zip", id="zip" required="true" type="number">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

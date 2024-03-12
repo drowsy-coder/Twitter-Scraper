@@ -7,36 +7,32 @@
                 font-family: Arial, sans-serif;
                 margin: 0;
                 padding: 20px;
-                background-color: #f4f4f4; 
+                background-color: #f4f4f4;
             }
-
             h1 {
-                color: #333; 
+                color: #333;
                 text-align: center;
             }
-
             form {
-                background-color: #fff; 
+                background-color: #fff;
                 padding: 20px;
-                border-radius: 8px; 
+                border-radius: 8px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 max-width: 500px;
                 margin: 20px auto;
             }
-
-            input[type="text"], input[type="tel"], input[type="number"], textarea {
-                width: 100%; 
+            input[type="text"], input[type="tel"], input[type="number"], input[type="email"], input[type="password"], textarea {
+                width: 100%;
                 padding: 10px;
                 margin: 6px 0 20px 0;
                 display: inline-block;
-                border: 1px solid #ccc; 
-                border-radius: 4px; 
-                box-sizing: border-box; 
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
             }
-
             input[type="submit"] {
                 width: 100%;
-                background-color: #4CAF50; 
+                background-color: #4CAF50;
                 color: white;
                 padding: 14px 20px;
                 margin: 8px 0;
@@ -44,15 +40,12 @@
                 border-radius: 4px;
                 cursor: pointer;
             }
-
             input[type="submit"]:hover {
-                background-color: #45a049; 
+                background-color: #45a049;
             }
-
             label {
-                color: #555; 
+                color: #555;
             }
-
         </style>
         <script>
         function validateform() {
@@ -60,10 +53,25 @@
             let number = document.forms["sform"]["number"].value;
             let gender = document.forms["sform"]["gender"].value;
             let zip = document.forms["sform"]["zip"].value;
+            let email = document.forms["sform"]["email"].value;
+            let password = document.forms["sform"]["password"].value;
 
-            var nameReg = /\d/
+            var nameReg = /\d/;
+            var emailReg = /^[\w-\.]+@gmail\.com$/;
+            var passwordReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
             if (nameReg.test(name)) {
                 alert("Name has number!");
+                return false;
+            }
+
+            if (!emailReg.test(email)) {
+                alert("Email must be a Gmail address!");
+                return false;
+            }
+
+            if (!passwordReg.test(password)) {
+                alert("Password must contain at least 8 characters, including 1 uppercase, 1 lowercase, and 1 number.");
                 return false;
             }
 
@@ -77,14 +85,13 @@
                 return false;
             }
 
-            if(zip.length != 6) {
+            if (zip.length != 6) {
                 alert("America nahi hai :/");
                 return false;
             }
 
             window.location.href = "thankyou.html";
             return false;
-
         }
         </script>
     </head>
@@ -92,19 +99,25 @@
         <h1>User Details Form</h1>
         <br>
         <form name="sform" onsubmit="return validateform()">
-            <label for="name" id="name">Name: </label>
-            <input name="name", id="name" type="text" required="true">
+            <label for="name">Name: </label>
+            <input name="name" id="name" type="text" required>
             <br><br>
-            <label for="number" id="number">Number: </label>
-            <input name="number", id="number" required="true" type="tel">
+            <label for="number">Number: </label>
+            <input name="number" id="number" required type="tel">
             <br><br>
             Gender: Male <input type="radio" name="gender" value="Male"> Female <input type="radio" name="gender" value="Female">
             <br><br>
-            <label for="Address" id="Address">Address: </label><br>
-            <textarea name="Address" required="true"></textarea>
+            <label for="Address">Address: </label><br>
+            <textarea name="Address" required></textarea>
             <br><br>
-            <label for="zip" id="zip">Pin Code: </label>
-            <input name="zip", id="zip" required="true" type="number">
+            <label for="zip">Pin Code: </label>
+            <input name="zip" id="zip" required type="number">
+            <br><br>
+            <label for="email">Email: </label>
+            <input name="email" id="email" required type="email">
+            <br><br>
+            <label for="password">Password: </label>
+            <input name="password" id="password" required type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
             <br><br>
             <input type="submit" value="Submit">
         </form>
